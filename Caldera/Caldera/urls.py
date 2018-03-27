@@ -18,8 +18,6 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls import include, url
 import temp_monitor.views as views
-import django_saml2_auth.views
-from django.contrib.auth import views as auth_views
 from rest_framework import routers
 
 
@@ -31,6 +29,4 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    url('^accounts/', include('django.contrib.auth.urls')),
-    url(r'^logout/$', auth_views.LogoutView.as_view(next_page='/accounts/login?next=/overview/'), name='logout'),
 ]
