@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Caldera</title>
+  </head>
+  <body>
+
+CALDERA<br /><br />
+
+Latest temperature: {{ last_temp.temperature }}C - {{last_temp.date_time}} <br />
+
+{% if temps %}
+<h2>Temperature</h2>
+  <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+{% autoescape off %}
+var trace1 = {
+  x: {{t_date_time}}, 
+  y: {{t}}, 
+  type: 'scatter'
+};
+{% endautoescape %}
+var data = [trace1];
+var layout = {
+  showlegend: false,
+  yaxis: {
+    range: [8, 30]
+  }
+};
+
+Plotly.newPlot('myDiv', data, layout);
+  </script>
+  {% endif %}
+  </body>
+</html>
